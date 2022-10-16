@@ -63,7 +63,7 @@ def main(month_partition, s3_bucket):
         logging.info("main() is started ...")
 
         # Get Spark Object
-        spark = get_spark_object(gav.envn,gav.appName)
+        spark = get_spark_object("TLC Analytics - Spark EMR on EKS")
 
         file_dir = f'{s3_bucket}/data/fhvhv_tripdata_{month_partition}.parquet'
 
@@ -90,7 +90,7 @@ def main(month_partition, s3_bucket):
 
         # Persist data to s3
         path = f'{s3_bucket}/output/parquet/fhvhv_tripdata_summary/{month_partition}/'
-        persist_data_s3(summary_df, path)
+        persist_data_s3(df=summary_df, path=path)
 
         logging.info(f"agg_fhvhv_tripcount.py is Completed.")
 
