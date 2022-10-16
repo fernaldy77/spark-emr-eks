@@ -105,6 +105,6 @@ if __name__ == "__main__" :
 
     # Take parameters
     month_partition = sys.argv[1]
-    s3_bucket = sys.argv[1]
+    s3_bucket = sys.argv[2]
 
     main(month_partition, s3_bucket)
