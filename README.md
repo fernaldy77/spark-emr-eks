@@ -43,7 +43,7 @@ EOF
 ```shell
 eksctl create cluster -f eksworkshop.yaml
 ```
-4. Create namespace spark and RBAC permission
+4. Create namespace development and RBAC permission
 ```shell
 kubectl create namespace development
 eksctl create iamidentitymapping --cluster tlc-analytics-eks  --namespace development --service-name "emr-containers" 
@@ -109,7 +109,7 @@ cat <<EoF > ~/environment/EMRContainers-JobExecutionRole.json
 EoF
 
 aws iam put-role-policy --role-name EMRContainers-JobExecutionRole --policy-name EMR-Containers-Job-Execution --policy-document file://~/environment/EMRContainers-JobExecutionRole.json
-aws emr-containers update-role-trust-policy --cluster-name tlc-analytics-eks --namespace spark --role-name EMRContainers-JobExecutionRole
+aws emr-containers update-role-trust-policy --cluster-name tlc-analytics-eks --namespace development --role-name EMRContainers-JobExecutionRole
 ```
 7. Register EKS cluster with EMR
 ```shell
@@ -120,7 +120,7 @@ aws emr-containers create-virtual-cluster \
     "type": "EKS",
     "info": {
         "eksInfo": {
-            "namespace": "spark"
+            "namespace": "development"
         }
     }
 }'
